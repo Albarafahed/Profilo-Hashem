@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المصمم الشامل | Creative Portfolio 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Tajawal:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent: #00ff88; 
+            --bg: #050505;
+            --card-bg: #111;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--bg); color: white; font-family: 'Tajawal', sans-serif; }
+
+        /* Navigation */
+        nav { padding: 30px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(5,5,5,0.9); z-index: 1000; border-bottom: 1px solid #222; }
+        .logo { font-family: 'Montserrat'; font-weight: 900; font-size: 1.5rem; color: var(--accent); }
+
+        /* Hero Section */
+        .hero { height: 40vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #111 0%, #050505 100%); }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 15px; }
+        .hero p { color: #888; font-size: 1.2rem; max-width: 700px; }
+
+        /* Filter System */
+        .filter-container { padding: 40px 5%; text-align: center; position: sticky; top: 80px; background: var(--bg); z-index: 900; }
+        .filter-btn { background: none; border: 1px solid #333; color: #888; padding: 10px 25px; cursor: pointer; border-radius: 50px; margin: 5px; transition: 0.3s; font-family: 'Tajawal'; }
+        .filter-btn:hover, .filter-btn.active { background: var(--accent); color: black; border-color: var(--accent); font-weight: bold; }
+
+        /* Portfolio Grid */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; padding: 20px 5% 100px; min-height: 500px; }
+        
+        .project-card { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            overflow: hidden; 
+            transition: 0.5s; 
+            position: relative; 
+            border: 1px solid #222;
+            display: block; /* القيمة الافتراضية */
+        }
+
+        /* تحريك الكروت عند الظهور */
+        .project-card.show { animation: scaleIn 0.4s ease forwards; }
+        .project-card.hide { display: none; }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,255,136,0.1); }
+        .image-placeholder { width: 100%; height: 300px; background: linear-gradient(45deg, #1a1a1a, #222); display: flex; align-items: center; justify-content: center; color: #444; }
+        .project-info { padding: 25px; }
+        .project-category { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; }
+        .project-title { font-size: 1.5rem; margin: 10px 0; font-weight: 800; }
+        .project-desc { color: #777; font-size: 0.9rem; }
+
+        footer { padding: 60px 5%; border-top: 1px solid #222; text-align: center; }
+        .contact-link { font-size: 2rem; color: white; text-decoration: none; border-bottom: 2px solid var(--accent); transition: 0.3s; }
+        .contact-link:hover { color: var(--accent); }
+
+/* تحسين قسم التواصل */
+.contact-section {
+    padding: 120px 8%;
+    background: radial-gradient(circle at bottom left, #0a1a12 0%, #050505 40%);
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+}
+
+.contact-content h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.glow-text {
+    color: var(--accent);
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+.contact-content p {
+    color: #888;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
+/* تصميم أزرار التواصل كـ كروت زجاجية */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    min-width: 250px;
+    backdrop-filter: blur(10px);
+}
+
+.icon-box {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: 0.3s;
+}
+
+.btn-info {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-info span {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.btn-info strong {
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+/* تأثيرات الـ Hover المخصصة */
+.whatsapp-card:hover {
+    border-color: #25D366;
+    background: rgba(37, 211, 102, 0.05);
+    transform: translateY(-10px);
+}
+
+.whatsapp-card:hover .icon-box {
+    background: #25D366;
+    color: white;
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+}
+
+.linkedin-card:hover {
+    border-color: #0077b5;
+    background: rgba(0, 119, 181, 0.05);
+    transform: translateY(-10px);
+}
+
+.linkedin-card:hover .icon-box {
+    background: #0077b5;
+    color: white;
+    box-shadow: 0 0 20px rgba(0, 119, 181, 0.4);
+}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">DESIGN.PRO</div>
+        <div style="font-size: 0.9rem; color: #666;">Portfolio 2026</div>
+    </nav>
+
+    <header class="hero">
+        <h1>إبداع بلا حدود</h1>
+        <p>استكشف جميع أقسام الجرافيكس من خلال أعمالي المختارة بعناية، حيث تلتقي التكنولوجيا بالفن.</p>
+    </header>
+
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">الكل</button>
+        <button class="filter-btn" data-filter="branding">الهوية البصرية</button>
+        <button class="filter-btn" data-filter="motion">الموشن جرافيك</button>
+        <button class="filter-btn" data-filter="uiux">تجربة المستخدم UI/UX</button>
+        <button class="filter-btn" data-filter="digital">الرسم الرقمي</button>
+        <button class="filter-btn" data-filter="packaging">التغليف</button>
+        <button class="filter-btn" data-filter="social">السوشيال ميديا</button>
+    </div>
+
+    <section class="portfolio-grid" id="portfolio-grid">
+        <div class="project-card" data-category="branding">
+            <div class="image-placeholder">PROJECT PREVIEW</div>
+            <div class="project-info">
+                <span class="project-category">الهوية البصرية</span>
+                <h3 class="project-title">براند "نخبة" للعطور</h3>
+                <p class="project-desc">تصميم شعار وبناء دليل هوية كامل.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="motion">
+            <div class="image-placeholder">MOTION REEL</div>
+            <div class="project-info">
+                <span class="project-category">الموشن جرافيك</span>
+                <h3 class="project-title">فيديو تعريفي لشركة تقنية</h3>
+                <p class="project-desc">تحريك شعارات وعناصر توضيحية بطريقة سينمائية.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="uiux">
+            <div class="image-placeholder">APP DESIGN</div>
+            <div class="project-info">
+                <span class="project-category">تجربة المستخدم UI/UX</span>
+                <h3 class="project-title">تطبيق "مساري" للرحلات</h3>
+                <p class="project-desc">تصميم رحلة المستخدم وواجهات جذابة.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="packaging">
+            <div class="image-placeholder">PACKAGING BOX</div>
+            <div class="project-info">
+                <span class="project-category">التغليف (Packaging)</span>
+                <h3 class="project-title">منتجات "طبيعة" العضوية</h3>
+                <p class="project-desc">تصميم علب المنتجات والملصقات بأسلوب صديق للبيئة.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="digital">
+            <div class="image-placeholder">DIGITAL ART</div>
+            <div class="project-info">
+                <span class="project-category">الرسم الرقمي</span>
+                <h3 class="project-title">سلسلة "خيال عربي"</h3>
+                <p class="project-desc">رسومات رقمية تعبر عن التراث برؤية مستقبلية.</p>
+            </div>
+        </div>
+
+        <div class="project-card" data-category="social">
+            <div class="image-placeholder">ADS DESIGN</div>
+            <div class="project-info">
+                <span class="project-category">السوشيال ميديا</span>
+                <h3 class="project-title">حملة "انطلق" التسويقية</h3>
+                <p class="project-desc">بوسترات إعلانية مبتكرة لمنصات التواصل.</p>
+            </div>
+        </div>
+
+    </section>
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-content">
+            <h2>لنصنع شيئاً <span class="glow-text">عظيماً</span> معاً</h2>
+            <p>سواء كان لديك فكرة مشروع أو رغبة في التعاون، أنا دائماً متاح للنقاش.</p>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://wa.me/966500000000" class="social-btn whatsapp-card" target="_blank">
+                <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+                <div class="btn-info">
+                    <span>تواصل سريع</span>
+                    <strong>واتساب</strong>
+                </div>
+            </a>
+
+            <a href="https://linkedin.com/in/yourprofile" class="social-btn linkedin-card" target="_blank">
+                <div class="icon-box"><i class="fab fa-linkedin-in"></i></div>
+                <div class="btn-info">
+                    <span>الشبكة المهنية</span>
+                    <strong>لينكد إن</strong>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+    <footer>
+        <a href="#" class="contact-link">لنبدأ التحدث الآن</a>
+        <p style="margin-top: 40px; font-size: 0.8rem; color: #333;">© 2026 جميع الأعمال حقوقها محفوظة</p>
+    </footer>
+
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 1. تغيير لون الزر النشط
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // 2. الحصول على القسم المختار
+                const selectedFilter = btn.getAttribute('data-filter');
+
+                // 3. الفلترة
+                projects.forEach(project => {
+                    const projectCategory = project.getAttribute('data-category');
+                    
+                    if (selectedFilter === 'all' || selectedFilter === projectCategory) {
+                        project.classList.remove('hide');
+                        project.classList.add('show');
+                    } else {
+                        project.classList.remove('show');
+                        project.classList.add('hide');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
